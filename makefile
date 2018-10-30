@@ -1,6 +1,6 @@
 # Makefile for scythe thirdparty
 
-SUBDIRS = zlib libpng libjpeg freetype script
+SUBDIRS = zlib libpng libjpeg freetype script bullet
 
 ifeq ($(OS),Windows_NT)
 	SUBDIRS += glew
