@@ -26,15 +26,21 @@ OBJECTS = $(SRC_FILES:.c=.o)
 
 LIBRARIES =
 
-all: $(SRC_FILES) $(TARGET)
+ifeq ($(OS),Windows_NT)
+	CLEAN = del /Q /F /S "src\*.o"
+else
+	CLEAN = find src -name "*.o" -type f -delete
+endif
+
+all: $(TARGET)
 	@echo $(TARGET_FILE) is done!
 
-$(TARGET): clean $(TARGET_TYPE)
+$(TARGET): $(TARGET_TYPE)
 
-# TODO: Make clean platform dependent
+.PHONY: clean
 clean:
-	@find src -name "*.o" -type f -delete
-    
+	@$(CLEAN)
+
 static: $(OBJECTS)
 	@echo making static library
 	@$(AR) $(STATIC_LIB) $(OBJECTS)

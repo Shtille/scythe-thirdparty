@@ -16,8 +16,6 @@ include sources.mk
 
 INCLUDE += -Isrc
 
-#DEFINES = -DPARSER_WIDE_STRING
-
 CFLAGS = -g -Wall -O3 -std=c++0x
 CFLAGS += $(INCLUDE)
 CFLAGS += $(DEFINES)
@@ -28,14 +26,20 @@ OBJECTS = $(SRC_FILES:.cpp=.o)
 
 LIBRARIES =
 
-all: $(SRC_FILES) $(TARGET)
+ifeq ($(OS),Windows_NT)
+	CLEAN = del /Q /F /S "src\*.o"
+else
+	CLEAN = find src -name "*.o" -type f -delete
+endif
+
+all: $(TARGET)
 	@echo $(TARGET_FILE) is done!
 
-$(TARGET): clean $(TARGET_TYPE)
+$(TARGET): $(TARGET_TYPE)
 
-# TODO: Make clean platform dependent
+.PHONY: clean
 clean:
-	@find src -name "*.o" -type f -delete
+	@$(CLEAN)
 
 static: $(OBJECTS)
 	@echo making static library
@@ -43,8 +47,8 @@ static: $(OBJECTS)
 	
 dynamic: $(OBJECTS)
 	@echo making shared library
-	@$(CCP) $(LDFLAGS) -o $(SHARED_LIB) $^ $(LIBRARIES)
+	@$(CXX) $(LDFLAGS) -o $(SHARED_LIB) $^ $(LIBRARIES)
 
 %.o : %.cpp
 	@echo compiling file $<
-	@$(CCP) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CFLAGS) -c $< -o $@

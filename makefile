@@ -1,15 +1,19 @@
 # Makefile for scythe thirdparty
 
+TARGET = thirdparty
 SUBDIRS = zlib libpng libjpeg freetype script bullet
 
 ifeq ($(OS),Windows_NT)
 	SUBDIRS += glew
 endif
 
-all: $(SUBDIRS)
+all: $(TARGET)
 
+.PHONY: clean
 clean:
-	@for dir in {$(SUBDIRS)} do ($(MAKE) -C $dir clean) done
+	@$(foreach directory, $(SUBDIRS), $(MAKE) -C $(directory) clean ;)
+
+$(TARGET): $(SUBDIRS)
 
 $(SUBDIRS):
 	@echo Get down to $@
