@@ -49,6 +49,9 @@ Temporary Items
 # Object files
 *.o
 
+# Dependency files
+*.d
+
 # Library files
 *.a
 *.so

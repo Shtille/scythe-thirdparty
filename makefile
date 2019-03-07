@@ -1,6 +1,8 @@
 # Makefile for scythe thirdparty
 
 TARGET = thirdparty
+
+# Main routine
 SUBDIRS = zlib libpng libjpeg freetype script bullet
 
 ifeq ($(OS),Windows_NT)
@@ -13,10 +15,12 @@ all: $(TARGET)
 clean:
 	@$(foreach directory, $(SUBDIRS), $(MAKE) -C $(directory) clean ;)
 
+.PHONY: help
+help:
+	@echo available targets: all clean
+
 $(TARGET): $(SUBDIRS)
 
-$(SUBDIRS):
-	@echo Get down to $@
-	@$(MAKE) -C $@
-
 .PHONY: $(SUBDIRS)
+$(SUBDIRS):
+	@$(MAKE) -C $@ $@
