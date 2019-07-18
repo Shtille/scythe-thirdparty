@@ -3,8 +3,9 @@
 # 'TARGET' should coinside with directory name
 TARGET = libpng
 TARGET_NAME = png
-STATIC_LIB = lib$(TARGET_NAME)$(STATIC_LIB_EXT)
-SHARED_LIB = lib$(TARGET_NAME)$(SHARED_LIB_EXT)
+LIBRARY_PATH := .
+STATIC_LIB = $(LIBRARY_PATH)/lib$(TARGET_NAME)$(STATIC_LIB_EXT)
+SHARED_LIB = $(LIBRARY_PATH)/lib$(TARGET_NAME)$(SHARED_LIB_EXT)
 
 ifeq ($(IS_STATIC),NO)
 TARGET_TYPE = dynamic
@@ -48,7 +49,7 @@ CPPFLAGS := -g -Wall -O3
 CPPFLAGS += $(INCLUDE)
 CPPFLAGS += $(DEFINES)
 # linker flags
-LDFLAGS += -L../zlib
+LDFLAGS += -L$(LIBRARY_PATH)
 LDLIBS = -lz
 # flags required for dependency generation; passed to compilers
 DEPFLAGS = -MT $@ -MD -MP -MF $(DEPDIR)/$*.Td
