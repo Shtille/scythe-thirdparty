@@ -1,8 +1,11 @@
 # Makefile for freetype
 
+ifeq ($(LIBRARY_PATH),)
+	$(error LIBRARY_PATH should be set by parent makefile with absolute path)
+endif
+
 TARGET = freetype
 TARGET_NAME = freetype
-LIBRARY_PATH := .
 STATIC_LIB = $(LIBRARY_PATH)/lib$(TARGET_NAME)$(STATIC_LIB_EXT)
 SHARED_LIB = $(LIBRARY_PATH)/lib$(TARGET_NAME)$(SHARED_LIB_EXT)
 
