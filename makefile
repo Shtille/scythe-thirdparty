@@ -3,7 +3,7 @@
 TARGET = thirdparty
 
 # Main routine
-SUBDIRS = zlib libpng libjpeg freetype script bullet
+SUBDIRS = zlib libpng libjpeg freetype script bullet googletest
 
 ifeq ($(OS),Windows_NT)
 	SUBDIRS += glew
