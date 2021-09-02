@@ -17,7 +17,7 @@ TARGET_TYPE = static
 TARGET_FILE = $(STATIC_LIB)
 endif
 
-INCLUDE = -Iinclude
+INCLUDE = -Iinclude -I.
 DEFINES =
 
 include sources.mk
@@ -44,7 +44,7 @@ endif
 # C flags
 CFLAGS := -std=c99
 # C++ flags
-CXXFLAGS := -std=c++99
+CXXFLAGS := -std=c++0x
 # C/C++ flags
 CPPFLAGS := -g -Wall -O3
 #CPPFLAGS += -Wextra -pedantic
@@ -105,11 +105,11 @@ $(TARGET_FILE): $(OBJECTS)
 	@echo linking $@
 	@$(LINK.o) $(OBJECTS)
 
-$(OBJDIR)/%.o: %.c
-$(OBJDIR)/%.o: %.c $(DEPDIR)/%.d
+$(OBJDIR)/%.o: %.cc
+$(OBJDIR)/%.o: %.cc $(DEPDIR)/%.d
 	@$(PRECOMPILE)
 	@echo compiling $<
-	@$(COMPILE.c) $<
+	@$(COMPILE.cc) $<
 	@$(POSTCOMPILE)
 
 .PRECIOUS = $(DEPDIR)/%.d
