@@ -1,4 +1,4 @@
-project(libjpeg)
+project(jpeg)
 
 #set(SRC_DIRS src)
 set(include_directories 

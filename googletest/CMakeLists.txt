@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
 #set(SRC_DIRS src)
 set(include_directories 
   include
+  .
 )
 #set(defines )
 set(SRC_FILES

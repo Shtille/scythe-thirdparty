@@ -1,4 +1,4 @@
-project(libpng)
+project(png)
 
 #set(SRC_DIRS src)
 set(include_directories 

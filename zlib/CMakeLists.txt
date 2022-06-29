@@ -1,4 +1,4 @@
-project(zlib)
+project(z)
 
 set(SRC_DIRS src)
 set(include_directories include src)
