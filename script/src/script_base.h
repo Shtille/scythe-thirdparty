@@ -10,6 +10,7 @@
 #include <vector>
 #include <memory> // for unique_ptr
 #include <utility> // for std::index_sequence, requires C++14
+#include <stdexcept>
 
 namespace console_script {
 
